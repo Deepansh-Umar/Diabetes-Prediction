@@ -16,7 +16,10 @@ df = pd.read_csv('diabetes.csv')
 
 
 #check existence of null values
-print(df.isnull().sum())
+for col in df.columns:
+    if df[col].isnull().sum() > 0:
+        median = df[col].median()
+        df[col].fillna(median, inplace=True)
 
 #check existence of 0s in improper fields
 columns_to_check = ['Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI']
